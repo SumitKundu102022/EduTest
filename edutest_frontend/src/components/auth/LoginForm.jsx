@@ -146,37 +146,37 @@ const LoginForm = () => {
           //     Login with Google
           //   </Button>
           // )}
-          // render={({ onClick, disabled }) => {
-          //   // --- NEW DEBUG LOG ---
-          //   console.log("GoogleLogin render prop is being called!");
-          //   // --- END NEW DEBUG LOG ---
-          //   <Button
-          //     onClick={onClick}
-          //     disabled={disabled}
-          //     className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md shadow-md transition-colors duration-300"
-          //   >
-          //     {/* Google Icon SVG */}
-          //     <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-          //       <path
-          //         d="M12.24 10.24v3.52h6.24c-.24 1.44-.96 2.88-2.16 3.84l3.12 2.4c2.16-2.16 3.36-5.04 3.36-8.64 0-.96-.12-1.8-.36-2.64H12.24V10.24z"
-          //         fill="#4285F4"
-          //       />
-          //       <path
-          //         d="M12.24 21.6c-3.12 0-5.76-1.68-7.2-4.32l3.12-2.4c.72 1.92 2.4 3.36 4.08 3.36 1.92 0 3.12-.96 3.84-1.68l3.12 2.4c-1.2 1.44-2.88 2.4-4.8 2.4z"
-          //         fill="#34A853"
-          //       />
-          //       <path
-          //         d="M5.04 14.88c-.24-.72-.36-1.44-.36-2.16s.12-1.44.36-2.16L1.92 8.16C.72 9.6 0 10.8 0 12c0 1.2.72 2.4 1.92 3.84L5.04 14.88z"
-          //         fill="#FBBC05"
-          //       />
-          //       <path
-          //         d="M12.24 4.32c1.44 0 2.64.48 3.6 1.2l2.88-2.88C16.8 1.92 14.4 0 12.24 0 9.12 0 6.48 1.68 5.04 4.32L8.16 6.72c.72-1.92 2.4-3.36 4.08-3.36z"
-          //         fill="#EA4335"
-          //       />
-          //     </svg>
-          //     Login with Google
-          //   </Button>
-          // }}
+          render={({ onClick, disabled }) => {
+            // --- NEW DEBUG LOG ---
+            // console.log("GoogleLogin render prop is being called!");
+            // --- END NEW DEBUG LOG ---
+            <Button
+              onClick={onClick}
+              disabled={disabled}
+              className="w-full bg-white hover:bg-zinc-100 hover:text-zinc-900 text-zinc-600 font-bold py-3 rounded-md flex items-center justify-center transition-colors duration-300 cursor-pointer border border-gray-300 dark:border-gray-600"
+            >
+              {/* Google Icon SVG */}
+              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12.24 10.24v3.52h6.24c-.24 1.44-.96 2.88-2.16 3.84l3.12 2.4c2.16-2.16 3.36-5.04 3.36-8.64 0-.96-.12-1.8-.36-2.64H12.24V10.24z"
+                  fill="#4285F4"
+                />
+                <path
+                  d="M12.24 21.6c-3.12 0-5.76-1.68-7.2-4.32l3.12-2.4c.72 1.92 2.4 3.36 4.08 3.36 1.92 0 3.12-.96 3.84-1.68l3.12 2.4c-1.2 1.44-2.88 2.4-4.8 2.4z"
+                  fill="#34A853"
+                />
+                <path
+                  d="M5.04 14.88c-.24-.72-.36-1.44-.36-2.16s.12-1.44.36-2.16L1.92 8.16C.72 9.6 0 10.8 0 12c0 1.2.72 2.4 1.92 3.84L5.04 14.88z"
+                  fill="#FBBC05"
+                />
+                <path
+                  d="M12.24 4.32c1.44 0 2.64.48 3.6 1.2l2.88-2.88C16.8 1.92 14.4 0 12.24 0 9.12 0 6.48 1.68 5.04 4.32L8.16 6.72c.72-1.92 2.4-3.36 4.08-3.36z"
+                  fill="#EA4335"
+                />
+              </svg>
+              Login with Google
+            </Button>;
+          }}
           // render={({ onClick, disabled }) => {
           //   // --- NEW DEBUG LOG ---
           //   console.log("GoogleLogin render prop is being called!");
