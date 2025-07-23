@@ -136,6 +136,7 @@ const LoginForm = () => {
           "LoginForm: Attempting to render GoogleLogin component..."
         )} */}
         <GoogleLogin
+          width={"100%"}
           onSuccess={onSuccess}
           onError={onError}
           scope="openid email profile" // Ensure openid, email, and profile scopes are requested
