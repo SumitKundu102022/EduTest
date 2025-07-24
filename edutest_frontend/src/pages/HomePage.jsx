@@ -89,7 +89,10 @@ const HomePage = () => {
             transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
             className="flex flex-col sm:flex-row justify-center gap-4"
           >
-            <Link to="/login">
+            <Link
+              to="/login"
+              className="w-full sm:w-auto sm:flex-1 sm:max-w-xs"
+            >
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -103,7 +106,10 @@ const HomePage = () => {
                 </Button>
               </motion.div>
             </Link>
-            <Link to="/register">
+            <Link
+              to="/register"
+              className="w-full sm:w-auto sm:flex-1 sm:max-w-xs"
+            >
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -113,7 +119,7 @@ const HomePage = () => {
                              bg-transparent border-2 border-white text-white hover:bg-white hover:text-zinc-950
                              transition-all duration-300 transform cursor-pointer"
                 >
-                  Sign Up for Free
+                  Sign Up Now
                 </Button>
               </motion.div>
             </Link>
