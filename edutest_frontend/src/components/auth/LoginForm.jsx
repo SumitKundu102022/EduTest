@@ -7,6 +7,7 @@ import { Button } from "../ui/button"; // Shadcn/ui button
 import { motion } from "framer-motion";
 import { Eye, EyeOff } from "lucide-react"; // Import eye icons from lucide-react
 import { Link } from "react-router-dom"; // Import Link for Forgot Password
+import Spinner from "../common/Spinner";
 //import googleIcon from "../../assets/google.svg"; // Import your Google icon here
 
 const LoginForm = () => {
@@ -150,130 +151,136 @@ const LoginForm = () => {
   };
 
   return (
-    <motion.form
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      onSubmit={handleSubmit}
-      className="space-y-4 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700"
-    >
-      <h2 className="text-2xl font-bold text-center text-gray-900 dark:text-gray-100 mb-6">
-        Login to eduTest
-      </h2>
-      <div>
-        <Input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          className="w-full p-3 border rounded-md dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 focus:ring-blue-500 "
-        />
-      </div>
-      <div className="relative">
-        {" "}
-        {/* Added relative positioning for the icon */}
-        <Input
-          type={showPassword ? "text" : "password"} // Toggle type based on state
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          className="w-full p-3 border rounded-md dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 focus:ring-blue-500 pr-10" // Added pr-10 for icon space
-        />
-        <motion.button
-          type="button" // Important: type="button" to prevent form submission
-          onClick={() => setShowPassword(!showPassword)}
-          className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 dark:text-gray-400 cursor-pointer"
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          aria-label={showPassword ? "Hide password" : "Show password"}
-        >
-          {showPassword ? (
-            <Eye className="h-5 w-5" />
+    <>
+      {
+        isLoading ? <Spinner /> : 
+          <motion.form
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            onSubmit={handleSubmit}
+            className="space-y-4 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700"
+          >
+            {" "}
+            <h2 className="text-2xl font-bold text-center text-gray-900 dark:text-gray-100 mb-6">
+              Login to eduTest
+            </h2>
+            <div>
+              <Input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="w-full p-3 border rounded-md dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 focus:ring-blue-500 "
+              />
+            </div>
+            <div className="relative">
+              {" "}
+              {/* Added relative positioning for the icon */}
+              <Input
+                type={showPassword ? "text" : "password"} // Toggle type based on state
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                className="w-full p-3 border rounded-md dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 focus:ring-blue-500 pr-10" // Added pr-10 for icon space
+              />
+              <motion.button
+                type="button" // Important: type="button" to prevent form submission
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 dark:text-gray-400 cursor-pointer"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                aria-label={showPassword ? "Hide password" : "Show password"}
+              >
+                {showPassword ? (
+                  <Eye className="h-5 w-5" />
+                ) : (
+                  <EyeOff className="h-5 w-5" />
+                )}
+              </motion.button>
+            </div>
+            <div className="flex justify-end text-sm">
+              <Link
+                to="#" // You can replace this with a specific route like "/forgot-password"
+                onClick={handleForgotPassword}
+                className="text-zinc-700 hover:underline dark:text-zinc-500"
+              >
+                Forgot Password?
+              </Link>
+            </div>
+            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+              <Button
+                type="submit"
+                className="w-full text-white font-bold py-3 rounded-md transition-colors duration-300 cursor-pointer" // Added bg-blue-600 and hover style
+                disabled={isLoading}
+                ref={loginButtonRef} // Attach the ref to the main login button
+              >
+                {isLoading ? "Logging in..." : "Login"}
+              </Button>
+            </motion.div>
+            <div className="relative flex items-center justify-center my-4">
+              <span className="absolute bg-white dark:bg-gray-800 px-3 text-gray-500 dark:text-gray-400">
+                OR
+              </span>
+              <div className="flex-grow border-t border-gray-300 dark:border-gray-600"></div>
+            </div>
+            {/* --- NEW LOG BEFORE THE GOOGLE LOGIN MOTION.DIV --- */}
+            {/* {console.log("LoginForm: Reached Google Login section in JSX.")} */}
+            {/* --- END NEW LOG --- */}
+            {/* <motion.div
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          className="flex justify-center"
+        > */}
+            {/* <Button
+            onClick={handleGoogleAuthResponse} // Pass 'user' role
+            className="w-full bg-white hover:bg-zinc-100 hover:text-zinc-900 text-zinc-600 font-bold py-3 rounded-md flex items-center justify-center transition-colors duration-300 cursor-pointer border border-gray-300 dark:border-gray-600"
+            disabled={isLoading}
+          >
+            <img src={googleIcon} alt="Google" className="w-5 h-5 mr-2" /> Login
+            with Google
+          </Button> */}
+            {/* Conditionally render GoogleLogin based on screen size */}
+            {/* {isSmallScreen ? (
+            <GoogleLogin
+              width="340" // Fixed width for small screens
+              onSuccess={onSuccess}
+              onError={onError}
+              scope="openid email profile"
+            />
           ) : (
-            <EyeOff className="h-5 w-5" />
-          )}
-        </motion.button>
-      </div>
-      <div className="flex justify-end text-sm">
-        <Link
-          to="#" // You can replace this with a specific route like "/forgot-password"
-          onClick={handleForgotPassword}
-          className="text-zinc-700 hover:underline dark:text-zinc-500"
-        >
-          Forgot Password?
-        </Link>
-      </div>
-      <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-        <Button
-          type="submit"
-          className="w-full text-white font-bold py-3 rounded-md transition-colors duration-300 cursor-pointer" // Added bg-blue-600 and hover style
-          disabled={isLoading}
-          ref={loginButtonRef} // Attach the ref to the main login button
-        >
-          {isLoading ? "Logging in..." : "Login"}
-        </Button>
-      </motion.div>
-      <div className="relative flex items-center justify-center my-4">
-        <span className="absolute bg-white dark:bg-gray-800 px-3 text-gray-500 dark:text-gray-400">
-          OR
-        </span>
-        <div className="flex-grow border-t border-gray-300 dark:border-gray-600"></div>
-      </div>
-
-      {/* --- NEW LOG BEFORE THE GOOGLE LOGIN MOTION.DIV --- */}
-      {/* {console.log("LoginForm: Reached Google Login section in JSX.")} */}
-      {/* --- END NEW LOG --- */}
-      {/* <motion.div
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
-        className="flex justify-center"
-      > */}
-        {/* <Button
-          onClick={handleGoogleAuthResponse} // Pass 'user' role
-          className="w-full bg-white hover:bg-zinc-100 hover:text-zinc-900 text-zinc-600 font-bold py-3 rounded-md flex items-center justify-center transition-colors duration-300 cursor-pointer border border-gray-300 dark:border-gray-600"
-          disabled={isLoading}
-        >
-          <img src={googleIcon} alt="Google" className="w-5 h-5 mr-2" /> Login
-          with Google
-        </Button> */}
-        {/* Conditionally render GoogleLogin based on screen size */}
-        {/* {isSmallScreen ? (
-          <GoogleLogin
-            width="340" // Fixed width for small screens
-            onSuccess={onSuccess}
-            onError={onError}
-            scope="openid email profile"
-          />
-        ) : (
-          <GoogleLogin
-            width="500" // Fixed width for large screens
-            onSuccess={onSuccess}
-            onError={onError}
-            scope="openid email profile"
-          />
-        )} */}
-
-        
-      {/* </motion.div> */}
-
-      <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="flex justify-center">
-        {/* {console.log("LoginForm: Current googleButtonWidth for rendering:", googleButtonWidth)} */}
-        {googleButtonWidth > 0 ? (
-          <GoogleLogin
-            width={googleButtonWidth.toString()} // Pass the dynamically calculated width
-            onSuccess={onSuccess}
-            onError={onError}
-            scope="openid email profile"
-          />
-        ) : (
-          <div className="w-full h-12 flex items-center justify-center text-gray-500 dark:text-gray-400 border border-dashed border-gray-300 rounded-md">
-            Loading Google button...
-          </div>
-        )}
-      </motion.div>
-    </motion.form>
+            <GoogleLogin
+              width="500" // Fixed width for large screens
+              onSuccess={onSuccess}
+              onError={onError}
+              scope="openid email profile"
+            />
+          )} */}
+            {/* </motion.div> */}
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="flex justify-center"
+            >
+              {/* {console.log("LoginForm: Current googleButtonWidth for rendering:", googleButtonWidth)} */}
+              {googleButtonWidth > 0 ? (
+                <GoogleLogin
+                  width={googleButtonWidth.toString()} // Pass the dynamically calculated width
+                  onSuccess={onSuccess}
+                  onError={onError}
+                  scope="openid email profile"
+                />
+              ) : (
+                <div className="w-full h-12 flex items-center justify-center text-gray-500 dark:text-gray-400 border border-dashed border-gray-300 rounded-md">
+                  Loading Google button...
+                </div>
+              )}
+            </motion.div>
+          </motion.form>
+      }
+    </>
   );
 };
 
